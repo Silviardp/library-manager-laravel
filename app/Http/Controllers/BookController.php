@@ -17,4 +17,21 @@ class BookController extends Controller
     {
     return view('books.index');
     }
+    /**
+     * Create a new book
+     */
+    public function store(Request $request)
+    {
+    $this->validate($request, [
+        'title' => 'required',
+        'author' => 'required',
+    ]);
+
+    $request->user()->books()->create([
+        'title' => $request->title,
+        'author' => $request->author,
+    ]);
+
+    return redirect('/books');
+    }
 }
