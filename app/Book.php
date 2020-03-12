@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-  protected $fillable = ['title'];
-  protected $fillable = ['author'];
+  protected $fillable = ['title', 'author'];
 
   /**
    * Get the user that owns the book.

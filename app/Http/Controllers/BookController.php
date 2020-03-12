@@ -10,4 +10,11 @@ class BookController extends Controller
     {
         $this->middleware('auth');
     }
+    /**
+     * Display a list of all of the user's book.
+     */
+    public function index(Request $request)
+    {
+    return view('books.index');
+    }
 }
