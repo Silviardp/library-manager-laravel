@@ -3,8 +3,8 @@
 @section('content')
 
     <!-- Bootstrap Boilerplate... -->
-
-    <div class="panel-body">
+<div class="container">
+      <div class="panel-body">
         <!-- Display Validation Errors -->
         @include('common.errors')
 
@@ -26,7 +26,7 @@
             </div>
 
             <!-- Add Book Button -->
-            <div class="form-group">
+            <div class="form-group mb-5">
                 <div class="col-sm-offset-3 col-sm-6">
                     <button type="submit" class="btn btn-primary">
                         <i class="fa fa-plus"></i> Add Book
@@ -40,7 +40,7 @@
     @if (count($books) > 0)
         <div class="panel panel-default">
             <div class="panel-heading">
-                Current Books
+                My Books
             </div>
 
             <div class="panel-body">
@@ -48,8 +48,9 @@
 
                     <!-- Table Headings -->
                     <thead>
-                        <th>Book</th>
-                        <th>&nbsp;</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Delete</th>
                     </thead>
 
                     <!-- Table Body -->
@@ -59,7 +60,11 @@
                                 <!-- Book title and author -->
                                 <td class="table-text">
                                     <div>{{ $book->title }}</div>
+                                </td>
+
+                                <td class="table-text">
                                     <div>{{ $book->author }}</div>
+                                    <a href="/books/{{ $book->id }}/edit">Edit</a>
                                 </td>
 
                                 <td>
@@ -78,4 +83,5 @@
             </div>
         </div>
     @endif
+</div>
 @endsection

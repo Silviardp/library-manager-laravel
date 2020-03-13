@@ -45,6 +45,21 @@ class BookController extends Controller
     return redirect('/books');
     }
     /**
+     * Update author's name
+     */
+    public function edit(Book $book)
+    {
+      return view('books.edit');
+    }
+
+
+    public function update(Request $request, Book $book)
+    {
+      $this->authorize('update', $book);
+      $book->update();
+      return redirect('/books');
+    }
+    /**
      * Destroy book
      */
     public function destroy(Request $request,Book $book)

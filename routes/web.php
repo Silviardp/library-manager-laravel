@@ -18,6 +18,8 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/books', 'BookController@index')->name('index');
 Route::post('/book', 'BookController@store')->name('store');
-Route::delete('/book/{book}', 'BookController@destroy');
+Route::delete('/book/{book}', 'BookController@destroy')->name('destroy');;
+Route::get('/book/{book}/edit', 'BookController@edit')->name('edit');
+Route::patch('/book/{book}', 'BookController@update')->name('update');
 
 Route::get('/home', 'HomeController@index')->name('home');
