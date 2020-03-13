@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Book;
-use App\Http\Requests;
+use App\Exports\UsersExport;
 use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\BookRepository;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BookController extends Controller
 {
@@ -72,5 +74,14 @@ class BookController extends Controller
         $book->delete();
         return redirect('/books');
     }
+
+     /**
+     * Export function
+     */
+    public function export()
+    {
+        return Excel::download(new BooksExport(), 'books.xlsx');
+    }
+
 }
 

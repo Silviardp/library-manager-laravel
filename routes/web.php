@@ -16,7 +16,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
 Route::get('/books', 'BookController@index')->name('index');
+Route::get('books/export', 'BookController@export')->name('export');
 Route::post('/book', 'BookController@store')->name('store');
 Route::delete('/book/{book}', 'BookController@destroy')->name('destroy');
 Route::get('/books/{book}/edit', 'BookController@edit')->name('update');

@@ -52,6 +52,13 @@
                 </div>
         </form>
       </div>
+
+        <div class="float-right">
+            <form action="{{url('books/export')}}" enctype="multipart/form-data">
+                <button class="btn btn-dark" type="submit">Export</button>
+            </form>
+        </div>
+
     <!-- Current Books -->
     @if (count($books) > 0)
         <div class="panel panel-default">
