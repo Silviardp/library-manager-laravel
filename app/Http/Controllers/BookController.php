@@ -22,14 +22,15 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-    return view('books.index', [
-        'books' => $this->books->forUser($request->user()),
-    ]);
+        return view('books.index', [
+          'books' => $this->books->forUser($request->user()),
+        ]);
     }
 
     /**
      * Create a new book
      */
+
     public function store(Request $request)
     {
     $this->validate($request, [
@@ -49,16 +50,19 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-      return view('books.edit');
+      $this->authorize('update', $book);
+      return view('books.edit', compact('book'));
     }
 
 
     public function update(Request $request, Book $book)
     {
       $this->authorize('update', $book);
+      $book->author = $request->input('author');
       $book->update();
       return redirect('/books');
     }
+
     /**
      * Destroy book
      */
@@ -69,3 +73,4 @@ class BookController extends Controller
         return redirect('/books');
     }
 }
+

@@ -40,7 +40,7 @@
     @if (count($books) > 0)
         <div class="panel panel-default">
             <div class="panel-heading">
-                My Books
+                List of books
             </div>
 
             <div class="panel-body">

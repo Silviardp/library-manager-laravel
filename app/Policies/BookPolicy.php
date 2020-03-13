@@ -20,6 +20,11 @@ class BookPolicy
         //
     }
 
+    public function edit(User $user, Book $book)
+    {
+        return $user->id == $book->user_id;
+    }
+
     public function update(User $user, Book $book)
     {
         return $user->id == $book->user_id;
