@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <!-- Bootstrap Boilerplate... -->
 <div class="container">
       <div class="panel-body">
         <!-- Display Validation Errors -->
@@ -14,32 +12,50 @@
 
             <!-- Book Name -->
             <div class="form-group">
-                <label for="book-title" class="col-sm-3 control-label">Book</label>
+                <label for="book-title" class="col-sm-3 control-label">Add a book</label>
 
                 <div class="col-sm-6">
-                    Title: <input type="text" name="title" id="book-title" class="form-control">
+                    <input type="text" placeholder= "Title" name="title" id="book-title" class="form-control mb-2" required>
                 </div>
 
                 <div class="col-sm-6">
-                    Author: <input type="text" name="author" id="book-author" class="form-control">
+                    <input type="text" placeholder= "Author" name="author" id="book-author" class="form-control" required>
                 </div>
             </div>
 
             <!-- Add Book Button -->
             <div class="form-group mb-5">
                 <div class="col-sm-offset-3 col-sm-6">
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-plus"></i> Add Book
-                    </button>
+                    <button type="submit" class="btn btn-primary">Add Book</button>
                 </div>
             </div>
         </form>
-    </div>
 
-    <!-- TODO: Current Books -->
+          <!-- Search Form -->
+        <form action="/index" method="GET" class="form-horizontal">
+        @csrf
+          <label for="book-title" class="col-sm-3 control-label">Search for a book</label>
+            <div class="form-row">
+                <div class="col">
+                  <input type="text" placeholder= "Title" name="title" id="book-title" class="form-control">
+                </div>
+                OR
+                <div class="col">
+                  <input type="text" placeholder= "Author" name="author" id="book-author" class="form-control">
+                </div>
+          </div>
+              <!-- Search Button -->
+                <div class="form-group mt-3">
+                    <div class="col">
+                        <button type="submit" class="btn btn-success">Search</button>
+                    </div>
+                </div>
+        </form>
+      </div>
+    <!-- Current Books -->
     @if (count($books) > 0)
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading mt-5">
                 List of books
             </div>
 
@@ -73,7 +89,7 @@
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
 
-                                        <button>Delete Book</button>
+                                        <button class="btn btn-danger">Delete Book</button>
                                     </form>
                                 </td>
                             </tr>
