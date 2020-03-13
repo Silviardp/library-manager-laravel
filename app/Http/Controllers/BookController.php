@@ -44,4 +44,13 @@ class BookController extends Controller
 
     return redirect('/books');
     }
+    /**
+     * Destroy book
+     */
+    public function destroy(Request $request,Book $book)
+    {
+        $this->authorize('destroy', $book);
+        $book->delete();
+        return redirect('/books');
+    }
 }

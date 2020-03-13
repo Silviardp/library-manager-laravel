@@ -63,7 +63,13 @@
                                 </td>
 
                                 <td>
-                                    <!-- TODO: Delete Button -->
+                                    <!-- Delete Button -->
+                                    <form action="/book/{{ $book->id }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+
+                                        <button>Delete Book</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
