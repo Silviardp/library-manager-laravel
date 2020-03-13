@@ -8,23 +8,27 @@
         <!-- Display Validation Errors -->
         @include('common.errors')
 
-        <!-- New Task Form -->
+        <!-- New Book Form -->
         <form action="/book" method="POST" class="form-horizontal">
         @csrf
 
-            <!-- Task Name -->
+            <!-- Book Name -->
             <div class="form-group">
-                <label for="book-name" class="col-sm-3 control-label">Book</label>
+                <label for="book-title" class="col-sm-3 control-label">Book</label>
 
                 <div class="col-sm-6">
-                    <input type="text" name="name" id="book-name" class="form-control">
+                    Title: <input type="text" name="title" id="book-title" class="form-control">
+                </div>
+
+                <div class="col-sm-6">
+                    Author: <input type="text" name="author" id="book-author" class="form-control">
                 </div>
             </div>
 
-            <!-- Add Task Button -->
+            <!-- Add Book Button -->
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                    <button type="submit" class="btn btn-default">
+                    <button type="submit" class="btn btn-primary">
                         <i class="fa fa-plus"></i> Add Book
                     </button>
                 </div>
@@ -33,4 +37,39 @@
     </div>
 
     <!-- TODO: Current Books -->
+    @if (count($books) > 0)
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Current Books
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-striped task-table">
+
+                    <!-- Table Headings -->
+                    <thead>
+                        <th>Book</th>
+                        <th>&nbsp;</th>
+                    </thead>
+
+                    <!-- Table Body -->
+                    <tbody>
+                        @foreach ($books as $book)
+                            <tr>
+                                <!-- Book title and author -->
+                                <td class="table-text">
+                                    <div>{{ $book->title }}</div>
+                                    <div>{{ $book->author }}</div>
+                                </td>
+
+                                <td>
+                                    <!-- TODO: Delete Button -->
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    @endif
 @endsection
