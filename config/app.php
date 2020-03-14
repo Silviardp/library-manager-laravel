@@ -168,7 +168,6 @@ return [
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
-
         /*
          * Application Service Providers...
          */
