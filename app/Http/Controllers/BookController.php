@@ -9,6 +9,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\BookRepository;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BooksExport;
+
 
 class BookController extends Controller
 {
@@ -78,10 +80,15 @@ class BookController extends Controller
      /**
      * Export function
      */
-    public function export()
+    public function export_csv()
     {
-        return Excel::download(new BooksExport(), 'books.xlsx');
+        return Excel::download(new BooksExport(), 'books.csv', \Maatwebsite\Excel\Excel::CSV, [
+            'Content-Type' => 'text/csv',
+        ]);
     }
 
+    public function export_xml()
+    {
+        return Excel::download(new BooksExport(), 'bookss.xml', \Maatwebsite\Excel\Excel::XML);
+    }
 }
-

@@ -53,12 +53,6 @@
         </form>
       </div>
 
-        <div class="float-right">
-            <form action="{{url('books/export')}}" enctype="multipart/form-data">
-                <button class="btn btn-dark" type="submit">Export</button>
-            </form>
-        </div>
-
     <!-- Current Books -->
     @if (count($books) > 0)
         <div class="panel panel-default">
@@ -106,5 +100,14 @@
             </div>
         </div>
     @endif
+    <div class="d-flex pr-5">
+            <form action="{{route('export-csv')}}">
+                <button class="btn btn-dark mr-3" type="submit">Export to CSV</button>
+            </form>
+            <br>
+            <form action="{{route('export-xml')}}">
+                <button class="btn btn-dark" type="submit">Export to XML</button>
+            </form>
+        </div>
 </div>
 @endsection
