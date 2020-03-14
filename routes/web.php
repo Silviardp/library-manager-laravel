@@ -18,8 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/books', 'BookController@index')->name('index');
-Route::get('/books/export-csv', 'BookController@export_csv')->name('export-csv');
-Route::get('/books/export-xml', 'BookController@export_xml')->name('export-xml');
+Route::post('/books/search', 'BookController@search')->name('search');
+Route::get('/books/export-csv', 'BookController@exportCsv')->name('export-csv');
+Route::get('/books/export-xml', 'BookController@exportXml')->name('export-xml');
 
 Route::post('/book', 'BookController@store')->name('store');
 Route::delete('/book/{book}', 'BookController@destroy')->name('destroy');

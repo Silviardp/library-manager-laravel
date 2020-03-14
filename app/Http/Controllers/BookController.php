@@ -76,19 +76,33 @@ class BookController extends Controller
         $book->delete();
         return redirect('/books');
     }
+    /**
+     * Search
+     */
+    public function search(Request $request,Book $book)
+    {
+      $search = $request->get('search');
+      $book = Book::where('title', 'like', '%'.$search.'%')->orWhere('author','LIKE','%'.$search.'%')->get();
+      if (count($book)>0)
+      return view('books.search')->withDetails($book)->withQuery ( $search );
+      else
+      return view ('books.search')->withMessage('No book(s) with this title or author found. Try again !');
+    }
+
+
 
      /**
      * Export function
      */
-    public function export_csv()
+    public function exportCsv()
     {
         return Excel::download(new BooksExport(), 'books.csv', \Maatwebsite\Excel\Excel::CSV, [
             'Content-Type' => 'text/csv',
         ]);
     }
 
-    public function export_xml()
+    public function exportXml()
     {
-        return Excel::download(new BooksExport(), 'bookss.xml', \Maatwebsite\Excel\Excel::XML);
+        return Excel::download(new BooksExport(), 'books.xml', \Maatwebsite\Excel\Excel::XML);
     }
 }

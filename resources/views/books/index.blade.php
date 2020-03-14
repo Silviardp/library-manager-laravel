@@ -31,27 +31,18 @@
             </div>
         </form>
 
-          <!-- Search Form -->
-        <form action="/index" method="GET" class="form-horizontal">
-        @csrf
-          <label for="book-title" class="col-sm-3 control-label">Search for a book</label>
-            <div class="form-row">
-                <div class="col">
-                  <input type="text" placeholder= "Title" name="title" id="book-title" class="form-control">
-                </div>
-                OR
-                <div class="col">
-                  <input type="text" placeholder= "Author" name="author" id="book-author" class="form-control">
-                </div>
-          </div>
-              <!-- Search Button -->
-                <div class="form-group mt-3">
-                    <div class="col">
-                        <button type="submit" class="btn btn-success">Search</button>
-                    </div>
-                </div>
+        <label for="book-title" class="col-sm-3 control-label">Search for book</label>
+        <form action="/books/search" method="POST" role="search">
+            @csrf
+            <div class="input-group">
+              <div class="col-sm-6">
+                  <input type="text" class="form-control" name="search"
+                    placeholder="Search a title or author's name"> <span class="input-group-btn">
+              </div>
+                  <button type="submit" class="btn btn-success">Search</button>
+                   </span>
+            </div>
         </form>
-      </div>
 
     <!-- Current Books -->
     @if (count($books) > 0)
