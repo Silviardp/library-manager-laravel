@@ -56,14 +56,15 @@
 
                     <!-- Table Headings -->
                     <thead>
-                        <th>Title</th>
-                        <th>Author</th>
+                        <th></i>@sortablelink('title')</th>
+                        <th></i>@sortablelink('author')</th>
                         <th>Delete</th>
                     </thead>
 
                     <!-- Table Body -->
                     <tbody>
-                        @foreach ($books as $book)
+                    @if($books->count())
+                        @foreach ($books as $key => $book)
                             <tr>
                                 <!-- Book title and author -->
                                 <td class="table-text">
@@ -86,6 +87,7 @@
                                 </td>
                             </tr>
                         @endforeach
+                      @endif
                     </tbody>
                 </table>
             </div>
@@ -96,9 +98,11 @@
                 <button class="btn btn-dark mr-3" type="submit">Export to CSV</button>
             </form>
             <br>
-            <form action="{{route('export-xml')}}">
+            <form action="{{route('export-xml') }}">
                 <button class="btn btn-dark" type="submit">Export to XML</button>
             </form>
         </div>
+        <br>
+      {{ $books->links() }}
 </div>
 @endsection

@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/books', 'BookController@index')->name('index');
-Route::post('/books/search', 'BookController@search')->name('search');
+Route::any('/books/search', 'BookController@search')->name('search');
 Route::get('/books/export-csv', 'BookController@exportCsv')->name('export-csv');
 Route::get('/books/export-xml', 'BookController@exportXml')->name('export-xml');
 

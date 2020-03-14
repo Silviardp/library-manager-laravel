@@ -26,9 +26,8 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-        return view('books.index', [
-          'books' => $this->books->forUser($request->user()),
-        ]);
+        $books = Book::sortable()->paginate(10);
+        return view('books.index')->withBooks($books);
     }
 
     /**
@@ -103,6 +102,21 @@ class BookController extends Controller
 
     public function exportXml()
     {
-        return Excel::download(new BooksExport(), 'books.xml', \Maatwebsite\Excel\Excel::XML);
+        $xml = new XMLWriter();
+        $xml->openURI('file.xml');
+        $xml->startDocument('1.0');
+        $xml->startElement('ListBook');
+        $xml->setIndent(4);
+        $i=1;
+        foreach ($books as $book){
+            $xml->writeElement('id', $book->id);
+            $xml->writeElement('title', $s->title);
+            $xml->writeElement('author', $s->author);
+            $i++;
+
+        $xml->endElement();
+        $xml->endDocument();
+        $xml->flush();
+        }
     }
-}
+  }
