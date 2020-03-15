@@ -35,7 +35,6 @@ class BookController extends Controller
     /**
      * Create a new book
      */
-
     public function store(Request $request)
     {
     $this->validate($request, [
@@ -50,15 +49,15 @@ class BookController extends Controller
 
     return redirect('/books');
     }
+
     /**
-     * Update author's name
+     * Update author's name -> only user who create the book
      */
     public function edit(Book $book)
     {
       $this->authorize('update', $book);
       return view('books.edit', compact('book'));
     }
-
 
     public function update(Request $request, Book $book)
     {
@@ -69,7 +68,7 @@ class BookController extends Controller
     }
 
     /**
-     * Destroy book
+     * Destroy book -> only user who create the book
      */
     public function destroy(Request $request,Book $book)
     {
@@ -77,17 +76,18 @@ class BookController extends Controller
         $book->delete();
         return redirect('/books');
     }
+
     /**
-     * Search
+     * Search for a book by title or author
      */
     public function search(Request $request,Book $book)
     {
       $search = Input::get('search');
       $book = Book::where('title', 'like', '%'.$search.'%')->orWhere('author','LIKE','%'.$search.'%')->get();
       if (count($book)>0)
-      return view('books.search')->withDetails($book)->withQuery ( $search );
+        return view('books.search')->withDetails($book)->withQuery ( $search );
       else
-      return view ('books.search')->withMessage('No book(s) with this title or author found. Try again !');
+        return view ('books.search')->withMessage('No book(s) with this title or author found. Try again !');
     }
 
      /**
@@ -102,21 +102,6 @@ class BookController extends Controller
 
     public function exportXml()
     {
-        $xml = new XMLWriter();
-        $xml->openURI('file.xml');
-        $xml->startDocument('1.0');
-        $xml->startElement('ListBook');
-        $xml->setIndent(4);
-        $i=1;
-        foreach ($books as $book){
-            $xml->writeElement('id', $book->id);
-            $xml->writeElement('title', $s->title);
-            $xml->writeElement('author', $s->author);
-            $i++;
 
-        $xml->endElement();
-        $xml->endDocument();
-        $xml->flush();
-        }
     }
   }

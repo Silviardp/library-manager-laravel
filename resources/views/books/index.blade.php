@@ -10,7 +10,7 @@
         <form action="/book" method="POST" class="form-horizontal">
         @csrf
 
-            <!-- Book Name -->
+            <!-- Add Book -->
             <div class="form-group">
                 <label for="book-title" class="col-sm-3 control-label">Add a book</label>
 
@@ -31,16 +31,22 @@
             </div>
         </form>
 
+        <!-- Search a book -->
+
         <label for="book-title" class="col-sm-3 control-label">Search for book</label>
         <form action="/books/search" method="POST" role="search">
             @csrf
             <div class="input-group">
               <div class="col-sm-6">
-                  <input type="text" class="form-control" name="search"
-                    placeholder="Search a title or author's name"> <span class="input-group-btn">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="search"
+                    placeholder="Search a title or author's name">
+                    <span class="input-group-btn"> </span>
               </div>
                   <button type="submit" class="btn btn-success">Search</button>
-                   </span>
+
             </div>
         </form>
 
@@ -50,7 +56,6 @@
             <div class="panel-heading mt-5">
                 List of books
             </div>
-
             <div class="panel-body">
                 <table class="table table-striped task-table">
 
@@ -93,16 +98,20 @@
             </div>
         </div>
     @endif
-    <div class="d-flex pr-5">
-            <form action="{{route('export-csv')}}">
-                <button class="btn btn-dark mr-3" type="submit">Export to CSV</button>
-            </form>
-            <br>
-            <form action="{{route('export-xml') }}">
-                <button class="btn btn-dark" type="submit">Export to XML</button>
-            </form>
-        </div>
+
+            <!-- Export list -->
+
+            <div class="d-flex pr-5">
+                    <form action="/books/export-csv" method="GET">
+                        <button class="btn btn-dark mr-3" type="submit">Export to CSV</button>
+                    </form>
+                    <br>
+                    <form action="/books/export-xml" method="GET">
+                        <button class="btn btn-dark" type="submit">Export to XML</button>
+                    </form>
+            </div>
         <br>
+        <!-- Paginate -->
       {{ $books->links() }}
 </div>
 @endsection
