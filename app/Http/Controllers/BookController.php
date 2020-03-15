@@ -13,6 +13,7 @@ use App\Exports\BooksExport;
 use App\Exports\TitleExport;
 use App\Exports\AuthorExport;
 use Illuminate\Support\Facades\Input;
+use Response;
 
 
 class BookController extends Controller
@@ -120,6 +121,25 @@ class BookController extends Controller
 
     public function exportXml()
     {
+      $books = Book::all();
+      $xml = new \XMLWriter();
+      $xml->openMemory();
+      $xml->setIndent(true);
+      $xml->startDocument();
+      $xml->startElement('books');
+      foreach ($books as $book) {
+        $xml->startElement('book');
+        $xml->writeAttribute('title', $book->title);
+        $xml->endElement();
+      }
 
+      $xml->endElement();
+      $xml->endDocument();
+      $content = $xml->outputMemory();
+      $response = Response::make($content);
+      $response->header('Content-Type', 'text/xml');
+      $response->header('Cache-Control', 'public');
+      $response->header('Content-Disposition', 'xml');
+      return $response;
     }
   }

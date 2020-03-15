@@ -101,7 +101,7 @@
 
     <!-- Export list -->
     <div class="d-flex">
-      <h2 class="mr-3">Export to CSV</h2>
+      <h2 class="mr-3">Download to CSV</h2>
             <form action="/books/books-csv" method="GET">
                 <button class="btn btn-dark mr-3" type="submit">List of books</button>
             </form>
@@ -114,7 +114,7 @@
     </div>
 
     <div class="d-flex pt-3">
-      <h2 class="mr-3">Export to XML</h2>
+      <h2 class="mr-3">Download to XML</h2>
               <form action="/books/export-xml" method="GET">
                   <button class="btn btn-dark" type="submit">List of books</button>
               </form>
