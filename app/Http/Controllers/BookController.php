@@ -10,8 +10,9 @@ use App\Http\Controllers\Controller;
 use App\Repositories\BookRepository;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\BooksExport;
+use App\Exports\TitleExport;
+use App\Exports\AuthorExport;
 use Illuminate\Support\Facades\Input;
-
 
 
 class BookController extends Controller
@@ -93,11 +94,28 @@ class BookController extends Controller
      /**
      * Export function
      */
-    public function exportCsv()
+    public function exportallCsv()
     {
         return Excel::download(new BooksExport(), 'books.csv', \Maatwebsite\Excel\Excel::CSV, [
             'Content-Type' => 'text/csv',
         ]);
+
+    }
+
+    public function exporttitleCsv()
+    {
+        return Excel::download(new TitleExport(), 'titles.csv', \Maatwebsite\Excel\Excel::CSV, [
+            'Content-Type' => 'text/csv',
+        ]);
+
+    }
+
+    public function exportauthorCsv()
+    {
+        return Excel::download(new AuthorExport(), 'authors.csv', \Maatwebsite\Excel\Excel::CSV, [
+            'Content-Type' => 'text/csv',
+        ]);
+
     }
 
     public function exportXml()

@@ -19,7 +19,9 @@ Auth::routes();
 
 Route::get('/books', 'BookController@index')->name('index');
 Route::any('/books/search', 'BookController@search')->name('search');
-Route::get('/books/export-csv', 'BookController@exportCsv')->name('export-csv');
+Route::get('/books/books-csv', 'BookController@exportallCsv')->name('books-csv');
+Route::get('/books/title-csv', 'BookController@exporttitleCsv')->name('title-csv');
+Route::get('/books/author-csv', 'BookController@exportauthorCsv')->name('author-csv');
 Route::get('/books/export-xml', 'BookController@exportXml')->name('export-xml');
 
 Route::post('/book', 'BookController@store')->name('store');

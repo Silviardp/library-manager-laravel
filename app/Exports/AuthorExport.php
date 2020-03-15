@@ -6,8 +6,7 @@ use App\Book;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\Exportable;
 
-
-class BooksExport implements FromQuery
+class AuthorExport implements FromQuery
 {
     use Exportable;
     /**
@@ -15,7 +14,6 @@ class BooksExport implements FromQuery
     */
     public function query()
     {
-        return Book::select('title', 'author');
+        return Book::select('author');
     }
-
 }
