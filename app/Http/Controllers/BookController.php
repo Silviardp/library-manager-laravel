@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Repositories\BookRepository;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\BooksExport;
+use Illuminate\Support\Facades\Input;
+
 
 
 class BookController extends Controller
@@ -80,15 +82,13 @@ class BookController extends Controller
      */
     public function search(Request $request,Book $book)
     {
-      $search = $request->get('search');
+      $search = Input::get('search');
       $book = Book::where('title', 'like', '%'.$search.'%')->orWhere('author','LIKE','%'.$search.'%')->get();
       if (count($book)>0)
       return view('books.search')->withDetails($book)->withQuery ( $search );
       else
       return view ('books.search')->withMessage('No book(s) with this title or author found. Try again !');
     }
-
-
 
      /**
      * Export function
