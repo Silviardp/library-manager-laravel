@@ -2,27 +2,20 @@
 
 Ebooky is a webapp where users can add, edit, or delete a book. Each book has a title and an author. Also, users can download the list of books (to CSV and XML).
 
-This is my first application built with Laravel framework as an assignment by Yaraku (translation software start-up based in Tokyo). 
+This is the first application I built with Laravel framework as an assignment by Yaraku based in Tokyo. 
 
 <img src="/ebooky.png" width="500" />
 
 ### Prerequisites
 
-Composer 
-Node.js
-Laravel
+* Composer 
+* Laravel
 
 ### Installing
 ```
 git clone https://github.com/Silviardp/library-manager-laravel.git
 ```
 cd library-manager-laravel
-```
-npm install
-```
-```
-npm run 
-```
 
 ## User login
 
@@ -35,7 +28,8 @@ Sqlite
 
 ## Built With
 
-* [Laravel](https://laravel.com/) - The web framework used
+* [Laravel](https://laravel.com/)
+* [Bootstrap](https://getbootstrap.com/)
 
 ## License
 
