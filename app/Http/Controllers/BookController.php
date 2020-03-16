@@ -93,33 +93,24 @@ class BookController extends Controller
     }
 
      /**
-     * Export function
+     * Export function csv and xml
      */
-    public function exportallCsv()
+    public function exportallCsv(Request $request)
     {
+      if($request->get('book-export-csv') == 'titlebookcsv'){
         return Excel::download(new BooksExport(), 'books.csv', \Maatwebsite\Excel\Excel::CSV, [
-            'Content-Type' => 'text/csv',
-        ]);
+        'Content-Type' => 'text/csv'
+      ]);} elseif ($request->get('book-export-csv') == 'titlecsv'){
+            return Excel::download(new TitleExport(), 'titles.csv', \Maatwebsite\Excel\Excel::CSV, [
+            'Content-Type' => 'text/csv'
+      ]);} elseif ($request->get('book-export-csv') == 'authorcsv'){
+            return Excel::download(new AuthorExport(), 'authors.csv', \Maatwebsite\Excel\Excel::CSV, [
+            'Content-Type' => 'text/csv'
+      ]);}
 
     }
 
-    public function exporttitleCsv()
-    {
-        return Excel::download(new TitleExport(), 'titles.csv', \Maatwebsite\Excel\Excel::CSV, [
-            'Content-Type' => 'text/csv',
-        ]);
-
-    }
-
-    public function exportauthorCsv()
-    {
-        return Excel::download(new AuthorExport(), 'authors.csv', \Maatwebsite\Excel\Excel::CSV, [
-            'Content-Type' => 'text/csv',
-        ]);
-
-    }
-
-    public function exportXml()
+    public function exportXml(Request $request)
     {
       $books = Book::all();
       $xml = new \XMLWriter();
@@ -127,13 +118,29 @@ class BookController extends Controller
       $xml->setIndent(true);
       $xml->startDocument();
       $xml->startElement('books');
-      foreach ($books as $book) {
-        $xml->startElement('book');
-        $xml->writeAttribute('title', $book->title);
-        $xml->endElement();
-      }
+          if($request->get('book-export') == 'titlebook'){
+          $xml->startElement('titlebook');
+          foreach ($books as $book) {
+              $xml->writeElement('title', $book->title);
+              $xml->writeElement('author', $book->author);
+          }
+          $xml->endElement();
+          } else if ($request->get('book-export') == 'title'){
+              $xml->startElement('title');
+                foreach ($books as $book) {
+                  $xml->writeElement('title', $book->title);
+                }
+              $xml->endElement();
+          } else if ($request->get('book-export') == 'author'){
+              $xml->startElement('author');
+                foreach ($books as $book) {
+                  $xml->startElement('author');
+                  $xml->writeElement('author', $book->author);
+                  $xml->endElement();
+                }
+            $xml->endElement();
+          }
 
-      $xml->endElement();
       $xml->endDocument();
       $content = $xml->outputMemory();
       $response = Response::make($content);
