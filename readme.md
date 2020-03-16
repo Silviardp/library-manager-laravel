@@ -19,8 +19,8 @@ cd library-manager-laravel
 
 ## User login
 
-E-mail: test@test.com
-Password: 12345678
+* E-mail: test@test.com
+* Password: 12345678
 
 ## Database
 
